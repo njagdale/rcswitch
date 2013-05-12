@@ -68,7 +68,7 @@ void SendCode()
 {
 	timespec sleeptime;
 	timespec remtime;
-	unsigned int numVal = sizeof(timeVal);
+	unsigned int numVal = sizeof(timeVal)/sizeof(float);
 
 
 	for (int iSend = 0; iSend < loopCount; iSend++)
