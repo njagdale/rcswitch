@@ -74,9 +74,8 @@ void SendCode()
 	for (int iSend = 0; iSend < loopCount; iSend++)
 	{
 		sleeptime.tv_sec = 0;
-
 		GPIO_CLR = 1 << 4;
-		//sleeptime.tv_nsec = (timeOff * 1000);
+		sleeptime.tv_nsec = timeOff;
 		nanosleep(&sleeptime, &remtime);
 
 		for (int i = 0; i < numVal/*timeSize*/; i++)
@@ -90,7 +89,7 @@ void SendCode()
 			{
 				GPIO_CLR = 1 << 4;
 			}
-			sleeptime.tv_nsec = timeVal[i] * 1000;
+			sleeptime.tv_nsec = timeVal[i];
 			nanosleep(&sleeptime, &remtime);
 		}
 	}
