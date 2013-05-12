@@ -68,6 +68,8 @@ void SendCode()
 {
 	timespec sleeptime;
 	timespec remtime;
+	unsigned int seed = 0;
+	unsigned int base = 1;
 	unsigned int numVal = sizeof(timeVal)/sizeof(float);
 
 
@@ -75,12 +77,13 @@ void SendCode()
 	{
 		sleeptime.tv_sec = 0;
 		GPIO_CLR = 1 << 4;
-		sleeptime.tv_nsec = timeOff;
+		sleeptime.tv_nsec = timeOff*500;
 		nanosleep(&sleeptime, &remtime);
-
+		
 		for (int i = 0; i < numVal/*timeSize*/; i++)
 		{
-			if (i % 2 == 0)
+			seed ^= base;
+			if (seed)
 			{
 
 				GPIO_SET = 1 << 4;
@@ -89,7 +92,7 @@ void SendCode()
 			{
 				GPIO_CLR = 1 << 4;
 			}
-			sleeptime.tv_nsec = timeVal[i];
+			sleeptime.tv_nsec = timeVal[i]*500;
 			nanosleep(&sleeptime, &remtime);
 		}
 	}
