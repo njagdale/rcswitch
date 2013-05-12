@@ -41,4 +41,4 @@ volatile unsigned *gpio;
 
 // function prototypes.
 void setup_io();
-void SendCode();
+void SendCode(unsigned int);
