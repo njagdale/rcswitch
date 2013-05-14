@@ -23,12 +23,12 @@ int main(int argc, char **argv)
 		//Determmine which channel to send the code to
 		if(strcmp(argv[1],"2")==0)
 		{
-			SendCode(2);
+			SendCode(CH2);
 		}	
 		else if(strcmp(argv[1],"3")==0)
 		{
 				
-			SendCode(3);
+			SendCode(CH3);
 		}	
 	}
 
@@ -90,30 +90,13 @@ void SendCode(unsigned int ch)
 	unsigned int base = 1;
 	unsigned int numVal = sizeof(timeVal)/sizeof(float);
 
-	// Determine which channel
-       
-	if(ch == 3)
-	{
-		memcpy(timeVal, timeVal3, sizeof(float)*NUM_ARRAY);
-	}
-	else if(ch == 2)
-	{
-		memcpy(timeVal, timeVal2, sizeof(float)*NUM_ARRAY);
-	}
-	else
-	{
-		//return -1;
-	}
-	
-
- 
-	for (int iSend = 0; iSend < loopCount; iSend++)
+	for (int iSend = 0; iSend < LOOP_COUNT; iSend++)
 	{
 		base = 1;
 		seed = 0;
 		sleeptime.tv_sec = 0;
 		GPIO_CLR = 1 << 4;
-		sleeptime.tv_nsec = timeOff*1000;
+		sleeptime.tv_nsec = OFF_CYCLE_TIME*1000;
 		nanosleep(&sleeptime, &remtime);
 		
 		for (int i = 0; i <numVal ; i++)
@@ -128,7 +111,7 @@ void SendCode(unsigned int ch)
 			{
 				GPIO_CLR = 1 << 4;
 			}
-			sleeptime.tv_nsec = timeVal[i]*1000;
+			sleeptime.tv_nsec = (channelList[ch])[i]*1000;
 			nanosleep(&sleeptime, &remtime);
 		}
 	}

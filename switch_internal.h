@@ -1,6 +1,18 @@
 // This file contains the decoded values for Nikhil Switch: 3
 
 #define NUM_ARRAY 49
+#define LOOP_COUNT 5
+#define OFF_CYCLE_TIME  5340
+
+typedef enum
+{
+	CH1 = 0,
+	CH2,
+	CH3,
+	CH4,
+	CH5,
+}CHANNEL;
+
 
 float timeVal2[] = 
 {
@@ -109,7 +121,18 @@ float timeVal3[] =
 	110,
 };
 
-//const int timeSize = 49;
 const int timeOff = 5340; //off time in nano seconds
-						  //This is just a speculation still. have to figure out this number
 const int loopCount = 5;
+
+float* channelList[5] = 
+{
+	NULL,
+	timeVal2,
+	timeVal3,
+	NULL,
+	NULL,
+};
+
+
+
+
